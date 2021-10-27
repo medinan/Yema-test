@@ -1,0 +1,39 @@
+version: '3.6'
+services:
+  # Dependencies
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./volumes/redis:/data
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: yema
+      POSTGRES_USER: yema
+      POSTGRES_DB: yema
+    volumes:
+      - ./volumes/postgres:/data
+  # Services
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile.local
+      target: dev
+    image: "yema-test"
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python ./api/manage.py migrate && python ./api/manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+      - db
+    tty: true
+
