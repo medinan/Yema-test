@@ -10,6 +10,7 @@ Crear una aplicación usando el framework Django que permite agendar citas con e
 * Desde el admin de Django, poder agregar el nombre del pediatra, un comentario y la fecha y hora de la cita agendada.
 * Desde el admin de Django, poder enviar un correo con el nombre del pediatra, un comentario y la fecha y hora asignada para la cita.
 * Pruebas unitarias
+* 
 Opcional
 * Funcionalidad para usuario final (Templates y views fuera de admin site de Django)
 * Empaquetar aplicación en un contenedor docker
